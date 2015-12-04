@@ -13,7 +13,7 @@
 #user.save!
 
 user = User.new
-user.email = 'admin@arcre.cl'
+user.email = 'admin@barcode.cl'
 user.password = 'admin123'
 user.password_confirmation = 'admin123'
 user.role = 'admin'

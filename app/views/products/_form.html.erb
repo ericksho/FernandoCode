@@ -1,0 +1,77 @@
+<%= form_for(@product, :html => {:autocomplete => "off"}) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<h4>Código:</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>País</th>
+        <th>Empresa</th>
+        <th>Producto</th>
+        <th>Digito Verificador</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= f.number_field :country,:required => true, :value => 780, :readonly => false %></td>
+        <td><%= f.select :enterprise, [["Fernando",0001]],{}, :onChange=>"checkFilled();"%></td>
+        <td><%= f.number_field :product,:required => true, :min => 0, :max => 9999, :value => @nextCodeDais%></td>
+        <td><%= f.text_field :verifyDigit, :value => '?', :disabled => true%></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="field">
+    <h4>Descripción:</h4>
+    <%= f.text_field :description,:required => true, :placeholder => 'p.e. Destornillador de punta Sodimac' %>
+  </div>
+  <div class="field">
+    <h4>Código Original: </h4>
+    <%= f.text_field :original_code,:required => false, :placeholder => 'Codigo original del producto', :value => @origiinalCode %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Crear Producto"%>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+    function checkFilled() 
+    {
+      var inputVal = document.getElementById("product_enterprise").value;
+      document.body.style.background="white";
+      if (inputVal == "1")
+      {
+          document.body.style.background="green";
+          document.getElementById("product_product").value = '<%=@nextCodeDais%>';
+      }
+      else
+      {
+          if (inputVal == "2") 
+          {
+              document.body.style.background="#005C99";
+              document.getElementById("product_product").value = '<%=@nextCodeArcre%>';
+          }
+          else
+          {
+              if (inputVal == "3") 
+              {
+                  document.body.style.background="black";
+                  document.getElementById("product_product").value = '<%=@nextCodeArmand%>';
+              }
+          }
+    }
+}
+ 
+checkFilled();
+</script>

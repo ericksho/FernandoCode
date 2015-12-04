@@ -1,0 +1,16 @@
+<h2>Datos Usuario</h2>
+<%resource_name = :user%>
+<%= form_for(@resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+ 
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true, :value => @resource.email , :disabled => 'disabled'%></div>
+
+  <!--<div><%= f.submit "Actualizar" %></div>-->
+<% end %>
+
+<h3>Cancelar cuenta</h3>
+
+<%= button_to("Eliminar Usuario", {:controller => 'admin', :action => 'delete_user', :destroy_id => @resource.id}, :data => { :confirm => "Eliminará un usuario de forma definitiva, Esta seguro?" })%>
+
+<%= link_to "Volver", :back %>

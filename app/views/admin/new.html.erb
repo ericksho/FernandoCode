@@ -1,0 +1,15 @@
+<h2>Nuevo Usuario</h2>
+
+<%= form_tag(:controller => "admin", :action => "create_user", :method => "post") do %>
+
+  <div><%= label_tag :email %><br />
+  <%= email_field_tag :email%></div>
+
+  <div><%= label_tag :password %><br />
+  <%= password_field_tag :password %></div>
+
+  <div><%= label_tag :password_confirmation %><br />
+  <%= password_field_tag :password_confirmation %></div>
+
+  <div><%= submit_tag "crear" %></div>
+<% end %>

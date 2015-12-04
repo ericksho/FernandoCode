@@ -1,0 +1,27 @@
+<h1>Detalle Producto</h1>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Codigo de Barras:</strong>
+  </br>
+  <% img = @product.getBarcode  %>
+  <%= image_tag "data:image/png;base64," + img %>
+</p>
+
+<p>
+  <strong>Codigo:</strong>
+  <%= @product.getStringCode%>
+</p>
+
+<p>
+  <strong>Descripción:</strong>
+  <%= @product.description%>
+</p>
+
+<p>
+  <strong>Código Original:</strong>
+  <%= @product.original_code%>
+</p>
+
+<%= link_to 'Editar Producto', edit_product_path(@product) %> |
+<%= link_to 'Volver', products_path %>

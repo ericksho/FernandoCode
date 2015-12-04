@@ -1,0 +1,32 @@
+
+<table border="0" width="700px">
+<col width="335">
+<tr>
+
+<% for i in 1..@codeCount %>
+	<%if @codes.at(i).to_s != ''%>
+		<% 
+			barcode_value = @codes.at(i).to_s 
+			barcode = barcode_value [0..-2]
+			img = Product.getImg barcode
+		%>
+
+		<td>
+			</br>
+			<%= image_tag "data:image/png;base64," + img %>
+
+			</br>
+			<%= barcode_value %>
+			</br>
+		</td>
+
+		<% if i % 2 == 0 %>
+			<tr></tr>
+		<% end %>
+	<% end %>
+
+<% end %>
+
+</tr>
+
+</table>

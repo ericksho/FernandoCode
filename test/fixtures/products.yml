@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  codeText: MyString
+  codeNumber: 1
+  description: MyString
+
+two:
+  codeText: MyString
+  codeNumber: 1
+  description: MyString

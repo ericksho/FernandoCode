@@ -1,0 +1,27 @@
+<h1>Listado de usuarios</h1>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Email</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @list.each do |user| %>
+      <tr>
+        <td><%= user.id%></td>
+        <td><%= user.email %></td>
+        <td><%= button_to 'Ver Usuario', edit_user_path(user), class: 'btn btn-success btn-xs', :method => :get %></td>
+        <td><%# button_to 'Eliminar Usuario', user, method: :delete, data: { confirm: 'Con esto eliminara el usuario de forma permanente, esta seguro?' }, class: 'btn btn-danger btn-xs'%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Insertar un nuevo usuario', new_user_path %>

@@ -1,0 +1,36 @@
+
+<h1>Selección para imprimir</h1>
+<p>Seleccione los códigos que desea imprimir</p>
+<%= form_tag 'http://arcrecode.comeze.com/sample.html', :method=>'post',:target => "_blank"  do %>
+
+<table border="0" width="1000px">
+<col width="300">
+<tr>
+
+<%= hidden_field_tag 'codeCount', @codeCount %>
+	<% for i in 1..@codeCount %>
+		<td>
+			<%= label_tag 'inserte codigo ' + i.to_s %>
+			<%= select_tag "code_" + i.to_s, options_for_select(@autocomplete_codes), class: 'combobox', :include_blank => 'Escoga un codigo' %>
+		</td>
+
+		<% if i % 3 == 0 %>
+			<tr></tr>
+		<% end %>
+
+	<% end %>
+	
+	</tr>
+
+	</table>
+
+	<%= submit_tag 'Imprimir' %>
+<%end%>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.combobox').combobox();
+  });
+</script>

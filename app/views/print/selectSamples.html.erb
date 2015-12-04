@@ -1,0 +1,35 @@
+<h1>Selección para imprimir muestras</h1>
+<p>Seleccione los códigos que desea imprimir</p>
+<%= form_tag print_sheet_sample_path, :method=>'post', :target => "_blank"  do %>
+
+<table border="0" width="700px">
+<col width="335">
+<tr>
+
+<%= hidden_field_tag 'codeCount', @codeCount %>
+	<% for i in 1..@codeCount %>
+		<td>
+			<%= label_tag 'inserte codigo ' + i.to_s %>
+			<%= select_tag "code_" + i.to_s, options_for_select(@autocomplete_codes), class: 'combobox', :include_blank => 'Escoga un codigo' %>
+		</td>
+
+		<% if i % 2 == 0 %>
+			<tr></tr>
+		<% end %>
+
+	<% end %>
+	
+	</tr>
+
+	</table>
+
+	<%= submit_tag 'Imprimir Muestras' %>
+<% end %>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.combobox').combobox();
+  });
+</script>

@@ -5,7 +5,8 @@
   <strong>Codigo de Barras:</strong>
   </br>
   <% img = @product.getBarcode  %>
-  <%= image_tag "data:image/png;base64," + img %>
+  <%= image_tag "data:image/png;base64," + img, download: "filename.png" %>
+  <%= link_to 'descargar', "data:image/png;base64," + img, download: @product.description + ".png", class: "btn btn-default" %>
 </p>
 
 <p>

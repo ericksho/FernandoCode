@@ -41,10 +41,6 @@ gem "has_barcode"
 #gem 'rails_12factor' for heroku
 gem 'rails_12factor'
 
-# so we can add barcode number to image
-gem 'rmagick'
-
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

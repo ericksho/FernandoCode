@@ -33,14 +33,10 @@
 
   <div class="field">
     <h4>Descripción:</h4>
-    <%= f.text_field :description,:required => true, :placeholder => 'p.e. Destornillador de punta Sodimac' %>
-  </div>
-  <div class="field">
-    <h4>Código Original: </h4>
-    <%= f.text_field :original_code,:required => false, :placeholder => 'Codigo original del producto', :value => @origiinalCode %>
+    <%= f.text_field :description,:required => true, :placeholder => 'p.e. Alcancía Chaparra' %>
   </div>
   <div class="actions">
-    <%= f.submit "Crear Producto"%>
+    <%= f.submit @submitText%>
   </div>
 <% end %>
 
@@ -52,7 +48,7 @@
       document.body.style.background="white";
       if (inputVal == "1")
       {
-          document.body.style.background="green";
+          document.body.style.background="white";
           document.getElementById("product_product").value = '<%=@nextCodeDais%>';
       }
       else

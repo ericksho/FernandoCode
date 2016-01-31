@@ -14,15 +14,11 @@ class ProductsController < ApplicationController
     end  
 
     if params.has_key?(:desc)
+      require "i18n"
       @desc = params[:desc]
-      @products.delete_if {|prod| !prod.description.include? @desc}
+      @products.delete_if {|prod| !I18n.transliterate(prod.description.downcase).include? I18n.transliterate(@desc.downcase)}
+      #@products.delete_if {|prod| prod.description.casecmp(@desc)}
     end
-
-    if params.has_key?(:orig)
-      @orig = params[:orig]
-      @products.delete_if {|prod| !prod.original_code.include? @orig}
-    end
-
     
   end
 
@@ -48,13 +44,14 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    @nextCode = @product.product.to_i
-    @origiinalCode = @product.original_code
+    @nextCodeDais = @product.product.to_i
+    @submitText = "Modificar Producto"
   end
 
   # POST /products
   # POST /products.json
   def create
+    @submitText = "Crear Producto"
     @product = Product.new(product_params)
 
     @product.send('verifyDigit=' ,@product.getVerifyDigit)
@@ -120,6 +117,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:country, :original_code, :enterprise, :description, :product, :verifyDigit,:code,:desc, :orig, :dais, :arcre, :armand, :filter)
+      params.require(:product).permit(:country, :enterprise, :description, :product, :verifyDigit,:code,:desc, :orig, :dais, :arcre, :armand, :filter)
     end
 end

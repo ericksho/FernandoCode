@@ -41,6 +41,9 @@ gem "has_barcode"
 #gem 'rails_12factor' for heroku
 gem 'rails_12factor'
 
+#gem to image modification
+gem 'rmagick', '~> 2.15', '>= 2.15.4'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

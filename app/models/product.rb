@@ -40,12 +40,6 @@ class Product < ActiveRecord::Base
 	def getBarcode
 
 		barcode_value = self.getArrayCode.join
-		Product.getImg barcode_value
-
-	end
-
-	def self.getImg barcode_value
-		full_path = "app/assets/images/" + barcode_value + ".png"
 		# coding: utf-8
  
 		require 'rubygems'
@@ -61,7 +55,7 @@ class Product < ActiveRecord::Base
 		 
 		barcode =Barby::EAN13.new(barcode_value)
 
-		png = barcode.to_png(:margin => 3, :xdim => 1, :height => 55)
+		png = barcode.to_png(:margin => 5, :xdim => 3, :height => 130)
 		img = png.to_yaml.gsub('--- !binary |-','')
 
 		imglist = Magick::Image.from_blob(png)
@@ -69,17 +63,19 @@ class Product < ActiveRecord::Base
 
     	text = Magick::Draw.new
 		text.font_family = 'Courier'
-		text.pointsize = 14
+		text.pointsize = 28	
 		text.gravity = Magick::SouthGravity
 		text.undercolor = 'white'
 		text.font_stretch = Magick::ExtraExpandedStretch
 
-		text.annotate(imgm, 0, 0, 0, 4, barcode_value)
+		text.annotate(imgm, 0, 0, 0, 10, ' ___________ ')
+		text.annotate(imgm, 0, 0, 0, 4, self.getStringCode)
 
 		png = imgm.to_blob{|i| i.format = 'png' }
 
 		img = png.to_yaml.gsub('--- !binary |-','')
 	end
+
 
 	def getStringCode
 		(getArrayCode+[self.getVerifyDigit]).join

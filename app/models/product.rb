@@ -49,15 +49,35 @@ class Product < ActiveRecord::Base
 		# coding: utf-8
  
 		require 'rubygems'
+		require 'RMagick'
+		require 'rmagick'
+		require 'chunky_png/rmagick'
 		 
 		# Load libraries of barby.
 		require 'barby'
 		require 'barby/barcode/ean_13'
 		require 'barby/outputter/png_outputter'
+		require 'barby/outputter/rmagick_outputter'
 		 
 		barcode =Barby::EAN13.new(barcode_value)
 
 		png = barcode.to_png(:margin => 3, :xdim => 1, :height => 55)
+		img = png.to_yaml.gsub('--- !binary |-','')
+
+		imglist = Magick::Image.from_blob(png)
+    	imgm = imglist.first
+
+    	text = Magick::Draw.new
+		text.font_family = 'Courier'
+		text.pointsize = 14
+		text.gravity = Magick::SouthGravity
+		text.undercolor = 'white'
+		text.font_stretch = Magick::ExtraExpandedStretch
+
+		text.annotate(imgm, 0, 0, 0, 4, barcode_value)
+
+		png = imgm.to_blob{|i| i.format = 'png' }
+
 		img = png.to_yaml.gsub('--- !binary |-','')
 	end
 

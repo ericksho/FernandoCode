@@ -26,11 +26,11 @@ class Product < ActiveRecord::Base
 		ent = ''
 		case self.enterprise
 		when 1
-			ent = 'Francisco'
+			ent = 'Fernando'
 		when 2
-			ent = 'Francisco2'
+			ent = 'Fernando2'
 		when 3 
-			ent = 'Francisco3'
+			ent = 'Fernando3'
 		end
 		ent
 				
